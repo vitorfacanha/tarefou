@@ -21,10 +21,10 @@
             <h2>Tarefou</h2>
 
             <nav>
-                <a href="#" class="ativo">Início</a>
-                <a href="#">Minhas tarefas</a>
-                <a href="#">Categorias</a>
-                <a href="#">Configurações</a>
+                <a href="#inicio" class="ativo" data-pagina="inicio">Início</a>
+                <a href="#minhas-tarefas" data-pagina="minhas-tarefas">Minhas tarefas</a>
+                <a href="#calendario" data-pagina="calendario">Calendário</a>
+                <a href="#configuracoes" data-pagina="configuracoes">Configurações</a>
             </nav>
         </aside>
 
@@ -34,45 +34,103 @@
                 <button>Nova tarefa</button>
             </header>
 
-            <section class="resumo">
+            <section class="pagina ativa" id="inicio">
+                
+                <section class="resumo">
 
-                <div class="boas-vindas">
-                    <h1>Olá, boa tarde!</h1>
-                    <p>Organize seu dia, uma tarefa de cada vez.</p>
-                </div>
-
-                <div class="contadores">
-
-                    <div class="contador">
-                        <span>Total</span>
-                        <strong>0</strong>
+                    <div class="boas-vindas">
+                        <h1>Olá, boa tarde!</h1>
+                        <p>Organize seu dia, uma tarefa de cada vez.</p>
                     </div>
 
-                    <div class="contador">
-                        <span>Pendentes</span>
-                        <strong>0</strong>
+                    <div class="contadores">
+
+                        <div class="contador">
+                            <span>Total</span>
+                            <strong>0</strong>
+                        </div>
+
+                        <div class="contador">
+                            <span>Pendentes</span>
+                            <strong>0</strong>
+                        </div>
+
+                        <div class="contador">
+                            <span>Concluídas</span>
+                            <strong>0</strong>
+                        </div>
+
                     </div>
 
-                    <div class="contador">
-                        <span>Concluídas</span>
-                        <strong>0</strong>
+                </section>
+
+                <section class="tarefas">
+
+                    <div class="titulo-tarefas">
+
+                        <div class="titulo-principal">
+                            <span class="icone-calendario">▦</span>
+
+                            <div>
+                                <h2>Tarefas de hoje</h2>
+                                <p>Suas atividades para hoje, 05 de novembro de 2026.</p>
+                            </div>
+                        </div>
+
+                        <button class="opcoes-tarefas">•••</button>
+
                     </div>
 
-                </div>
+                    <div class="lista-tarefas">
+            
+                    </div>
 
+                </section>
+                
             </section>
 
-            <section class="tarefas">
+            <section class="minhas-tarefas pagina" id="minhas-tarefas">
 
                 <div class="titulo-tarefas">
-                    <h2>Minhas tarefas</h2>
-                    <p>Acompanhe suas atividades por aqui.</p>
+
+                    <div>
+                        <span class="icone-minhas-tarefas">☰</span>
+                    </div>
+
+                    <div>
+                        <h2>Minhas tarefas</h2>
+                        <p>Gerencie todas as suas atividades em um só lugar.</p>
+                    </div>
                 </div>
 
-                <div class="filtros">
-                    <button>Todas</button>
-                    <button>Pendentes</button>
-                    <button>Concluídas</button>
+                <div class="controles-tarefas">
+
+                    <div class="filtros">
+                        <button class="filtro ativo">Todas</button>
+                        <button class="filtro">Pendentes</button>
+                        <button class="filtro">Concluídas</button>
+                    </div>
+
+                    <div class="filtro-categoria">
+
+                        <div class="seletor-categoria">
+
+                            <span class="icone-categoria">🏷️</span>
+
+                            <select id="categoria-filtro">
+                                <option value="todas">Todas as categorias</option>
+                                <option value="estudo">Estudo</option>
+                                <option value="trabalho">Trabalho</option>
+                                <option value="pessoal">Pessoal</option>
+                                <option value="lazer">Lazer</option>
+                            </select>
+
+                            <span class="seta-categoria">⌄</span>
+
+                        </div>  
+
+                    </div>
+
                 </div>
 
                 <div class="lista-tarefas">
@@ -80,7 +138,68 @@
                 </div>
 
             </section>
+            
+            <div class="modal" id="modal-tarefa">
 
+                <div class="modal-conteudo">
+
+                    <div class="modal-topo">
+                        <h2>Nova tarefa</h2>
+                        <button type="button" id="fechar-modal">&times;</button>
+                    </div>
+
+                    <form id="form-tarefa">
+
+                        <div class="campo">
+                            <label for="nome-tarefa">Nome da tarefa</label>
+                            <input
+                                type="text"
+                                id="nome-tarefa"
+                                placeholder="Ex: Estudar JavaScript"
+                                required
+                            >
+                        </div>
+
+                        <div class="campo">
+                            <label for="descricao-tarefa">Descrição</label>
+                            <textarea
+                                id="descricao-tarefa"
+                                placeholder="Adicione detalhes sobre a tarefa..."
+                            ></textarea>
+                        </div>
+
+                        <div class="campo">
+                            <label for="categoria-tarefa">Categoria</label>
+                            <select id="categoria-tarefa" required>
+                                <option value="">Selecione uma categoria</option>
+                                <option value="estudo">Estudo</option>
+                                <option value="trabalho">Trabalho</option>
+                                <option value="pessoal">Pessoal</option>
+                                <option value="lazer">Lazer</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="data-tarefa">Data</label>
+                            <input type="date" id="data-tarefa" required>
+                        </div>
+
+                        <div class="campo">
+                            <label for="horario-tarefa">Horário (opcional)</label>
+                            <input type="time" id="horario-tarefa">
+                        </div>
+
+                        <div class="modal-acoes">
+                            <button type="button" id="cancelar-tarefa">Cancelar</button>
+                            <button type="submit">Salvar tarefa</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+            
         </main>
 
     </div>

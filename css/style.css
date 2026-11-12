@@ -141,6 +141,9 @@ body {
 }
 
 .titulo-tarefas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 22px;
 }
 
@@ -158,7 +161,7 @@ body {
 
 .lista-tarefas {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
     align-items: start;
     min-height: 250px;
@@ -309,4 +312,335 @@ body {
         #FFFFFF00
     );
     transform: rotate(-25deg);
+}
+
+.tarefas {
+    padding: 18px;
+    border: 1px solid #FFFFFFCC;
+    border-radius: 18px;
+    background: #FFFFFF70;
+    box-shadow: 0 5px 18px #23648214;
+}
+
+.titulo-tarefas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.titulo-principal {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.icone-calendario {
+    color: #164574;
+    font-size: 35px;
+}
+
+.titulo-tarefas h2 {
+    margin-bottom: 5px;
+    color: #164574;
+    font-size: 21px;
+}
+
+.titulo-tarefas p {
+    color: #64819B;
+    font-size: 13px;
+}
+
+.lista-tarefas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tarefa {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 54px;
+    padding: 10px 16px;
+    border: 1px solid #FFFFFFCC;
+    border-radius: 13px;
+    background: #FFFFFFB3;
+    box-shadow: 0 3px 10px #2364820D;
+    transition: 0.3s;
+}
+
+.tarefa:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px #2364821F;
+}
+
+.tarefa strong {
+    color: #164574;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.concluir-tarefa {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border: 2px solid #A9C8E5;
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.tarefa.concluida .concluir-tarefa {
+    border-color: #08B99B;
+    background: #08B99B;
+}
+
+.tarefa.concluida strong {
+    color: #7894AD;
+    text-decoration: line-through;
+}
+
+.categoria {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.horario {
+    color: #64819B;
+    font-size: 13px;
+}
+
+.acoes-tarefa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.acoes-tarefa button {
+    border: none;
+    background: transparent;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.minhas-tarefas {
+    padding: 22px;
+    border: 1px solid #FFFFFFCC;
+    border-radius: 18px;
+    background: #FFFFFF70;
+    box-shadow: 0 5px 18px #23648214;
+}
+
+.contenido-tarefas .filtros {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.contenido-tarefas .filtros button {
+    padding: 10px 20px;
+    border: 1px solid #FFFFFF80;
+    border-radius: 25px;
+    background: #6496be26;
+    color: #164574;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contenido-tarefas .filtros button:hover {
+    background: #88e8f0;
+    transform: translateY(-2px);
+}
+
+.contenido-tarefas .filtros button.ativo {
+    border-color: #08b9c5;
+    background: #08b9c5;
+    color: white;
+    box-shadow: 0 4px 12px #08b9c533;
+}
+
+.filtro-categoria {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filtro-categoria label {
+    color: #456b91;
+    font-size: 13px;
+}
+
+.filtro-categoria select {
+    padding: 0;
+    border: none;
+    outline: none;
+    appearance: none;
+    background: transparent;
+    color: #456b91;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.filtro-categoria select:focus {
+    border-color: #56bfcb;
+    box-shadow: 0 0 0 3px #56bfcb26;
+}
+
+.icone-minhas-tarefas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #164f91;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.seta-categoria {
+    color: #164f91;
+    font-size: 15px;
+    pointer-events: none;
+}
+
+.pagina {
+    display: none;
+}
+
+.pagina.ativa {
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #102A4366;
+    backdrop-filter: blur(5px);
+}
+
+.modal-conteudo {
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px;
+    border: 1px solid #FFFFFFCC;
+    border-radius: 20px;
+    background: #F8FCFE;
+    box-shadow: 0 15px 45px #16457433;
+}
+
+.modal-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.modal-topo button {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    background: #e5f2f7;
+    color: #456b91;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.modal-topo button:hover {
+    background: #d0eaf2;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.campo label {
+    color: #164574;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #C8DDEA;
+    border-radius: 11px;
+    outline: none;
+    background: #FFFFFF;
+    color: #164574;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.campo textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus,
+.campo select:focus {
+    border-color: #08b9c5;
+    box-shadow: 0 0 0 3px #08b9c526;
+}
+
+.modal-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.modal-acoes button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#cancelar-tarefa {
+    background: #e5f2f7;
+    color: #456b91;
+}
+
+#cancelar-tarefa:hover {
+    background: #d0eaf2;
+}
+
+.modal-acoes button[type="submit"] {
+    background: #08b9c5;
+    color: white;
+}
+
+.modal-acoes button[type="submit"]:hover {
+    background: #079eaa;
+    transform: translateY(-2px);
 }
