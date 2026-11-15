@@ -39,7 +39,7 @@
                 <section class="resumo">
 
                     <div class="boas-vindas">
-                        <h1>Olá, boa tarde!</h1>
+                        <h1 id="saudacao">Olá!</h1>
                         <p>Organize seu dia, uma tarefa de cada vez.</p>
                     </div>
 
@@ -47,17 +47,17 @@
 
                         <div class="contador">
                             <span>Total</span>
-                            <strong>0</strong>
+                            <strong id="total-tarefas">0</strong>
                         </div>
 
                         <div class="contador">
                             <span>Pendentes</span>
-                            <strong>0</strong>
+                            <strong id="tarefas-pendentes">0</strong>
                         </div>
 
                         <div class="contador">
                             <span>Concluídas</span>
-                            <strong>0</strong>
+                            <strong id="tarefas-concluidas">0</strong>
                         </div>
 
                     </div>
@@ -73,7 +73,7 @@
 
                             <div>
                                 <h2>Tarefas de hoje</h2>
-                                <p>Suas atividades para hoje, 05 de novembro de 2026.</p>
+                                <p id="data-hoje"></p>
                             </div>
                         </div>
 
@@ -81,10 +81,7 @@
 
                     </div>
 
-                    <div class="lista-tarefas">
-            
-                    </div>
-
+                    <div class="lista-tarefas" id="lista-tarefas-hoje"></div>
                 </section>
                 
             </section>
@@ -106,9 +103,9 @@
                 <div class="controles-tarefas">
 
                     <div class="filtros">
-                        <button class="filtro ativo">Todas</button>
-                        <button class="filtro">Pendentes</button>
-                        <button class="filtro">Concluídas</button>
+                        <button class="filtro ativo" data-filtro="todas">Todas</button>
+                        <button class="filtro" data-filtro="pendentes">Pendentes</button>
+                        <button class="filtro" data-filtro="concluidas">Concluídas</button>
                     </div>
 
                     <div class="filtro-categoria">
@@ -133,12 +130,88 @@
 
                 </div>
 
-                <div class="lista-tarefas">
+                <div class="lista-tarefas" id="lista-minhas-tarefas"></div>
+
+            </section>
+
+            <section class="pagina calendario" id="calendario">
+                <div class="cabecalho-calendario">
+                    <div class="titulo-calendario">
+                        <span class="icone-calendario">▦</span>
+
+                        <div>
+                            <h2>Calendário</h2>
+                            <p>Visualize suas tarefas por data.</p>
+                        </div>
+                    </div>
+
+                    <div class="seletor-mes-ano">
+                         <button type="button" id="mes-anterior" class="seta-mes">
+                            ←
+                        </button>
+
+                        <button type="button" id="abrir-seletor-data" class="botao-mes-ano">
+                            <span id="mes-ano-atual">Novembro de 2026</span>
+                            <span class="seta-baixo">⌄</span>
+                        </button>
+
+                        <button type="button" id="mes-proximo" class="seta-mes">
+                            →
+                        </button>
+
+                        <div class="seletor-vertical" id="seletor-vertical">
+
+                            <div class="seletor-coluna">
+                                <span class="valor-anterior" id="mes-anterior-texto"></span>
+                                <strong id="mes-selecionado"></strong>
+                                <span class="valor-proximo" id="mes-proximo-texto"></span>
+                            </div>
+
+                            <div class="seletor-coluna">
+                                <span class="valor-anterior" id="ano-anterior-texto"></span>
+                                <strong id="ano-selecionado"></strong>
+                                <span class="valor-proximo" id="ano-proximo-texto"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                                        
+                </div>
+
+                <div class="calendario-layout" id="calendario-layout">
+                   
+                    <div class="calendario-mensal">
+                        <div class="dias-semana">
+                            <span>Dom</span>
+                            <span>Seg</span>
+                            <span>Ter</span>
+                            <span>Qua</span>
+                            <span>Qui</span>
+                            <span>Sex</span>
+                            <span>Sáb</span>
+                        </div>
+
+                        <div class="grade-calendario" id="grade-calendario"></div>
+                    </div>
+
+                    <aside class="painel-dia" id="painel-dia">
+
+                        <div class="painel-dia-topo">
+                            <div>
+                                <h3 id="data-selecionada">14 de novembro</h3>
+                                <p id="quantidade-tarefas-dia">0 tarefas</p>
+                            </div>
+
+                            <button type="button" id="voltar-calendario">&#8592;</button>
+                        </div>
+
+                        <div class="lista-tarefas-dia" id="lista-tarefas-dia"></div>
+                    </aside>
 
                 </div>
 
             </section>
-            
+
             <div class="modal" id="modal-tarefa">
 
                 <div class="modal-conteudo">
@@ -199,7 +272,7 @@
                 </div>
 
             </div>
-            
+
         </main>
 
     </div>
