@@ -74,7 +74,7 @@ body {
     padding: 25px;
     border: 1px solid #FFFFFFCC;
     border-radius: 18px;
-    background: #F1F5F9E6;
+    background: #f1f5f95d;
     backdrop-filter: blur(18px);
     box-shadow: 0 8px 25px #2364821f;
 }
@@ -1015,4 +1015,498 @@ body {
 .valor-proximo {
     padding: 4px;
     cursor: pointer;
+}
+
+.mensagem-vazia {
+    width: 100%;
+    padding: 45px 20px;
+    text-align: center;
+    background: #FFFFFF80;
+    border: 1px solid #FFFFFFB3;
+    border-radius: 18px;
+}
+
+.mensagem-vazia h3 {
+    color: #174675;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.mensagem-vazia p {
+    color: #66809B;
+    font-size: 14px;
+}
+
+
+.estado-vazio {
+    min-height: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.ilustracao-vazia {
+    width: 145px;
+    height: 135px;
+    margin-bottom: 12px;
+}
+
+.estado-vazio h3 {
+    color: #174675;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.estado-vazio p,
+.mensagem-extra {
+    color: #527CA5;
+    font-size: 15px;
+}
+
+.onda-decorativa {
+    width: 85px;
+    height: 8px;
+    margin-top: 15px;
+    background: #08B9C6;
+    border-radius: 50%;
+}
+
+.comemoracao {
+    position: relative;
+    overflow: hidden;
+}
+
+.icone-conquista {
+    width: 85px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #08B9C6;
+    color: #FFFFFF;
+    font-size: 55px;
+    font-weight: bold;
+    animation: conquista 0.7s ease both;
+    box-shadow: 0 8px 25px #08B9C855;
+    margin-bottom: 18px;
+}
+
+.comemoracao h3 {
+    animation: aparecer 0.6s ease both;
+}
+
+.comemoracao p,
+.mensagem-extra {
+    animation: aparecer 0.8s ease both;
+}
+
+.confetes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.confetes span {
+    position: absolute;
+    top: -15px;
+    left: calc(5% + var(--posicao, 0) * 1%);
+    width: 9px;
+    height: 15px;
+    border-radius: 3px;
+    background: #08B9C6;
+    animation: cair-confete 2s ease-in forwards;
+}
+
+.confetes span:nth-child(3n) {
+    background: #17649A;
+}
+
+.confetes span:nth-child(3n + 1) {
+    background: #F5C85B;
+}
+
+.confetes span:nth-child(1) { left: 8%; }
+.confetes span:nth-child(2) { left: 17%; animation-delay: .1s; }
+.confetes span:nth-child(3) { left: 27%; animation-delay: .2s; }
+.confetes span:nth-child(4) { left: 37%; animation-delay: .3s; }
+.confetes span:nth-child(5) { left: 47%; animation-delay: .1s; }
+.confetes span:nth-child(6) { left: 57%; animation-delay: .2s; }
+.confetes span:nth-child(7) { left: 67%; animation-delay: .3s; }
+.confetes span:nth-child(8) { left: 77%; animation-delay: .1s; }
+.confetes span:nth-child(9) { left: 87%; animation-delay: .2s; }
+.confetes span:nth-child(10) { left: 13%; animation-delay: .4s; }
+.confetes span:nth-child(11) { left: 23%; animation-delay: .3s; }
+.confetes span:nth-child(12) { left: 33%; animation-delay: .2s; }
+.confetes span:nth-child(13) { left: 63%; animation-delay: .4s; }
+.confetes span:nth-child(14) { left: 73%; animation-delay: .3s; }
+.confetes span:nth-child(15) { left: 83%; animation-delay: .2s; }
+.confetes span:nth-child(16) { left: 43%; animation-delay: .5s; }
+.confetes span:nth-child(17) { left: 53%; animation-delay: .4s; }
+.confetes span:nth-child(18) { left: 93%; animation-delay: .3s; }
+
+@keyframes conquista {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cair-confete {
+    to {
+        transform: translateY(330px) rotate(500deg);
+        opacity: 0;
+    }
+}
+
+/* CONTADORES */
+
+.contadores {
+    display: flex;
+    gap: 14px;
+}
+
+.contador {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    min-width: 172px;
+    padding: 13px 16px;
+    background: #FFFFFF80;
+}
+
+.icone-contador {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.icone-contador svg {
+    width: 29px;
+    height: 29px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icone-contador.total {
+    color: #0878E8;
+    background: #D9ECFF;
+}
+
+.icone-contador.pendentes {
+    color: #F28A19;
+    background: #FFF0DC;
+}
+
+.icone-contador.concluidas {
+    color: #08B98B;
+    background: #D9F8ED;
+}
+
+.dados-contador {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+}
+
+.dados-contador span {
+    color: #456B91;
+    font-size: 13px;
+}
+
+.dados-contador strong {
+    margin: 0;
+    color: #164574;
+    font-size: 27px;
+}
+
+/* ATIVIDADES DO INÍCIO */
+
+#inicio .tarefas {
+    width: 100%;
+    padding: 20px;
+}
+
+#inicio .lista-tarefas {
+    width: 100%;
+    gap: 8px;
+}
+
+#inicio .tarefa {
+    width: 100%;
+    min-height: 54px;
+    padding: 10px 16px;
+    gap: 15px;
+}
+
+#inicio .informacoes-tarefa {
+    flex: 1;
+    min-width: 0;
+}
+
+#inicio .informacoes-tarefa h3 {
+    color: #164574;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#inicio .informacoes-tarefa p {
+    color: #64819B;
+    font-size: 12px;
+}
+
+#inicio .categoria.categoria-estudo {
+    background: #9563D926;
+    color: #8050C1;
+}
+
+#inicio .categoria.categoria-trabalho {
+    background: #20B99026;
+    color: #159875;
+}
+
+#inicio .categoria.categoria-pessoal {
+    background: #3198D526;
+    color: #237FB8;
+}
+
+#inicio .categoria.categoria-lazer {
+    background: #E9A33B26;
+    color: #C18420;
+}
+
+#inicio .horario {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.tarefa {
+    min-height: 68px;
+    gap: 16px;
+    padding: 10px 16px;
+    border-left: 6px solid #08B9C5;
+    background: #FFFFFFCC;
+}
+
+.tarefa.categoria-estudo {
+    border-left-color: #9563D9;
+}
+
+.tarefa.categoria-trabalho {
+    border-left-color: #20B990;
+}
+
+.tarefa.categoria-pessoal {
+    border-left-color: #3198D5;
+}
+
+.tarefa.categoria-lazer {
+    border-left-color: #E9A33B;
+}
+
+.informacoes-tarefa {
+    flex: 1;
+    min-width: 100px;
+}
+
+.informacoes-tarefa h3 {
+    color: #164574;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.informacoes-tarefa p {
+    color: #64819B;
+    font-size: 12px;
+}
+
+.categoria {
+    flex-shrink: 0;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.categoria.categoria-estudo {
+    background: #9563D926;
+    color: #8050C1;
+}
+
+.categoria.categoria-trabalho {
+    background: #20B99026;
+    color: #159875;
+}
+
+.categoria.categoria-pessoal {
+    background: #3198D526;
+    color: #237FB8;
+}
+
+.categoria.categoria-lazer {
+    background: #E9A33B26;
+    color: #C18420;
+}
+
+.data-tarefa,
+.horario {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    color: #64819B;
+    font-size: 13px;
+}
+
+.icone-data,
+.icone-horario {
+    color: #64819B;
+    font-size: 17px;
+}
+
+.acoes-tarefa {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.acoes-tarefa button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 21px;
+    background: transparent;
+}
+
+.acoes-tarefa .editar-tarefa {
+    color: #164F91;
+}
+
+.acoes-tarefa .excluir-tarefa {
+    color: #D94C70;
+    background: #FCE4E4;
+}
+
+#inicio .tarefa,
+#minhas-tarefas .tarefa {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 12px 24px;
+    border-radius: 18px;
+}
+
+#inicio .informacoes-tarefa,
+#minhas-tarefas .informacoes-tarefa {
+    flex: 1;
+    min-width: 120px;
+}
+
+#inicio .informacoes-tarefa h3,
+#minhas-tarefas .informacoes-tarefa h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+}
+
+#inicio .categoria,
+#minhas-tarefas .categoria {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+#inicio .data-tarefa,
+#inicio .horario,
+#minhas-tarefas .data-tarefa,
+#minhas-tarefas .horario {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    color: #58799B;
+}
+
+.icone-data,
+.icone-horario {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: #527BA5;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.acoes-tarefa {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 12px;
+}
+
+.acoes-tarefa button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 8px;
+    border-radius: 50%;
+    background: transparent;
+    transition: 0.2s;
+}
+
+.acoes-tarefa button svg {
+    width: 23px;
+    height: 23px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.acoes-tarefa .editar-tarefa:hover {
+    background: #DCEEF5;
+}
+
+.acoes-tarefa .excluir-tarefa:hover {
+    background: #F8D5DC;
 }
