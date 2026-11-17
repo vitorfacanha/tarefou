@@ -1,6 +1,12 @@
 const linksMenu = document.querySelectorAll('.sidebar nav a');
-
 const paginas = document.querySelectorAll('.pagina');
+
+const modalExclusao = document.getElementById('modal-exclusao');
+const cancelarExclusao = document.getElementById('cancelar-exclusao');
+const confirmarExclusao = document.getElementById('confirmar-exclusao');
+
+let idTarefaExcluindo = null;
+
 
 linksMenu.forEach(link => {
 
@@ -60,6 +66,61 @@ function salvarTarefas() {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
 }
 
+function mostrarNotificacao(tipo) {
+    const mensagens = {
+        criar: {
+            titulo: 'Tarefa criada!',
+            descricao: 'Adicionada com sucesso.',
+            icone: '✓'
+        },
+        editar: {
+            titulo: 'Tarefa atualizada!',
+            descricao: 'Alterações salvas.',
+            icone: '✓'
+        },
+        excluir: {
+            titulo: 'Tarefa excluída!',
+            descricao: 'Removida com sucesso.',
+            icone: '✓'
+        }
+    };
+
+    const mensagem = mensagens[tipo];
+    if (!mensagem) return;
+
+    const container = document.getElementById('notificacoes');
+
+    container.innerHTML = '';
+
+    const notificacao = document.createElement('div');
+    notificacao.className = `notificacao ${tipo}`;
+
+    notificacao.innerHTML = `
+        <div class="notificacao-conteudo">
+            <span class="notificacao-icone">${mensagem.icone}</span>
+
+            <div class="notificacao-texto">
+                <strong>${mensagem.titulo}</strong>
+                <p>${mensagem.descricao}</p>
+            </div>
+
+            <button type="button" class="fechar-notificacao"
+                aria-label="Fechar notificação">&times;</button>
+        </div>
+
+        <div class="progresso-notificacao"></div>
+    `;
+
+    container.appendChild(notificacao);
+
+    notificacao.querySelector('.fechar-notificacao')
+        .addEventListener('click', () => notificacao.remove());
+
+    setTimeout(() => {
+        notificacao.remove();
+    }, 4000);
+}
+
 function escaparHTML(texto = '') {
     return String(texto).replace(/[&<>"']/g, caractere => ({
         '&': '&amp;',
@@ -94,6 +155,10 @@ formularioTarefa.addEventListener('submit', (evento) => {
         horario: document.getElementById('horario-tarefa').value
 };
 
+    const tipoNotificacao = idTarefaEditando !== null
+        ? 'editar'
+        : 'criar';
+
     if (idTarefaEditando !== null) {
         const tarefaSelecionada = tarefas.find(
             tarefa => tarefa.id === idTarefaEditando
@@ -116,6 +181,7 @@ formularioTarefa.addEventListener('submit', (evento) => {
 
     salvarTarefas();
 
+    mostrarNotificacao(tipoNotificacao);
     formularioTarefa.reset();
     modalTarefa.style.display = 'none';
 
@@ -161,6 +227,18 @@ function exibirTarefas(filtro = 'todas') {
         return correspondenteStatus &&
             correspondenteCategoria &&
             correspondenteBusca;
+    });
+
+    tarefasFiltradas.sort((a, b) => {
+
+        if (a.concluida !== b.concluida) {
+            return a.concluida ? 1 : -1;
+        }
+
+        const dataA = `${a.data}T${a.horario || '23:59'}`;
+        const dataB = `${b.data}T${b.horario || '23:59'}`;
+
+        return dataA.localeCompare(dataB);
     });
 
     if (tarefasFiltradas.length === 0) {
@@ -261,28 +339,18 @@ function exibirTarefas(filtro = 'todas') {
         const botaoExcluir = elementoTarefa.querySelector('.excluir-tarefa');
 
         botaoExcluir.addEventListener('click', () => {
-
-            const confirmar = confirm('Deseja realmente excluir esta tarefa?');
-
-            if (confirmar) {
-                tarefas = tarefas.filter(item => item.id !== tarefa.id);
-
-                salvarTarefas();
-                atualizarInicio();
-                exibirTarefas(filtroAtual);
-                gerarCalendario();
-            }
-
+            idTarefaExcluindo = tarefa.id;
+            modalExclusao.style.display = 'flex';
         });
 
         listaMinhasTarefas.appendChild(elementoTarefa);
-    });
-}
+        });
+        }
 
 function mensagemSemAtividades() {
     return `
         <div class="estado-vazio">
-            <svg class="ilustracao-vazia" viewBox="0 0 160 150">
+            <svg class="ilustracao-vazia" viewBox="0 -20 160 170">
                 <rect x="35" y="20" width="82" height="105" rx="10"
                     fill="#E5F8FC" stroke="#17649A" stroke-width="7"/>
                 <rect x="60" y="12" width="34" height="17" rx="6"
@@ -296,10 +364,23 @@ function mensagemSemAtividades() {
                 <path d="M100 108 l9 9 17 -19"
                     fill="none" stroke="white" stroke-width="6"
                     stroke-linecap="round" stroke-linejoin="round"/>
+                <g class="brilhos-ilustracao"
+                    fill="none"
+                    stroke="#08B9C6"
+                    stroke-width="4"
+                    stroke-linecap="round">
+
+                        <path d="M122 0 L126 -10"/>
+                        <path d="M137 11 L146 4"/>
+                        <path d="M143 26 L154 23"/>
+
+                    </g>
             </svg>
             <h3>Nenhuma atividade para hoje!</h3>
             <p>Seu dia está livre. Aproveite para descansar!</p>
-            <span class="onda-decorativa"></span>
+            <svg class="onda-decorativa" viewBox="0 0 110 16" aria-hidden="true">
+                <path d="M2 9 L13 5 L24 9 L35 5 L46 9 L57 5 L68 9 L79 5 L90 9 L101 5 L108 8"/>
+            </svg>
         </div>
     `;
 }
@@ -480,6 +561,8 @@ botaoFiltro.forEach(botao => {
 const selectCategoria = document.getElementById('categoria-filtro');
 selectCategoria.addEventListener('change', () => {
     categoriaAtual = selectCategoria.value;
+    document.getElementById("texto-categoria").textContent =
+        document.getElementById("categoria-filtro").selectedOptions[0].textContent;
 
     exibirTarefas(filtroAtual);
 });
@@ -517,6 +600,33 @@ function formatarDataISO(data) {
     const dia = String(data.getDate()).padStart(2, '0');
 
     return `${ano}-${mes}-${dia}`;
+}
+
+function gerarIndicadoresDia(tarefasDoDia) {
+    const categorias = ['estudo', 'trabalho', 'pessoal', 'lazer'];
+
+    const indicadores = categorias
+        .filter(categoria =>
+            tarefasDoDia.some(tarefa => tarefa.categoria === categoria)
+        )
+        .map(categoria => {
+            const tarefasCategoria = tarefasDoDia.filter(
+                tarefa => tarefa.categoria === categoria
+            );
+
+            const todasConcluidas = tarefasCategoria.every(
+                tarefa => tarefa.concluida
+            );
+
+            const status = todasConcluidas ? 'concluida' : 'pendente';
+
+            return `
+                <span class="bolinha-categoria ${categoria} ${status}"></span>
+            `;
+        })
+        .join('');
+
+    return `<div class="indicadores-dia">${indicadores}</div>`;
 }
 
 function gerarCalendario() {
@@ -565,8 +675,6 @@ function gerarCalendario() {
 
         const dataISO = formatarDataISO(dataDoDia);
 
-        dia.textContent = dataDoDia.getDate();
-
         if (dataDoDia.getMonth() !== mesAtual) {
             dia.classList.add('outro-mes');
         }
@@ -574,6 +682,11 @@ function gerarCalendario() {
         const tarefasDoDia = tarefas.filter(
             tarefa => tarefa.data === dataISO
         );
+
+        dia.innerHTML = `
+            <span class="numero-dia">${dataDoDia.getDate()}</span>
+            ${gerarIndicadoresDia(tarefasDoDia)}
+        `;
 
         if (tarefasDoDia.length > 0) {
             dia.classList.add('tem-tarefas');
@@ -653,7 +766,9 @@ function exibirTarefasDoDia() {
 
             <div>
                 <h3>${escaparHTML(tarefa.nome)}</h3>
-                <span class="categoria">${escaparHTML(tarefa.categoria)}</span>
+                <span class="categoria categoria-${escaparHTML(tarefa.categoria)}">
+                    ${escaparHTML(tarefa.categoria.charAt(0).toUpperCase() + tarefa.categoria.slice(1))}
+                </span>
             </div>
         `;
 
@@ -669,6 +784,33 @@ function exibirTarefasDoDia() {
         listaDia.appendChild(elemento);
     });
 }
+
+cancelarExclusao.addEventListener('click', () => {
+    modalExclusao.style.display = 'none';
+    idTarefaExcluindo = null;
+});
+
+confirmarExclusao.addEventListener('click', () => {
+    if (idTarefaExcluindo === null) return;
+
+    tarefas = tarefas.filter(item => item.id !== idTarefaExcluindo);
+
+    modalExclusao.style.display = 'none';
+    idTarefaExcluindo = null;
+
+    salvarTarefas();
+    mostrarNotificacao('excluir');
+    atualizarInicio();
+    exibirTarefas(filtroAtual);
+    gerarCalendario();
+});
+
+modalExclusao.addEventListener('click', (evento) => {
+    if (evento.target === modalExclusao) {
+        modalExclusao.style.display = 'none';
+        idTarefaExcluindo = null;
+    }
+});
 
 function trocarMes(diferenca) {
     const novaData = new Date(
@@ -811,3 +953,30 @@ seletorVertical.addEventListener('click', (evento) => {
 
 gerarCalendario();
 atualizarInicio();
+
+const botaoOpcoes = document.getElementById("abrir-opcoes-tarefas");
+const menuOpcoes = document.getElementById("menu-opcoes-tarefas");
+const verTodasTarefas = document.getElementById("ver-todas-tarefas");
+
+botaoOpcoes.addEventListener("click", (evento) => {
+    evento.stopPropagation();
+
+    const aberto = menuOpcoes.classList.toggle("aberto");
+    botaoOpcoes.setAttribute("aria-expanded", String(aberto));
+});
+
+document.addEventListener("click", (evento) => {
+    if (!evento.target.closest(".menu-tarefas")) {
+        menuOpcoes.classList.remove("aberto");
+        botaoOpcoes.setAttribute("aria-expanded", "false");
+    }
+});
+
+verTodasTarefas.addEventListener("click", () => {
+    document.querySelector(
+        '.sidebar nav a[data-pagina="minhas-tarefas"]'
+    ).click();
+
+    menuOpcoes.classList.remove("aberto");
+    botaoOpcoes.setAttribute("aria-expanded", "false");
+});

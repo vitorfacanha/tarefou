@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Tarefou | Organize suas tarefas</title>
+    <link rel="icon" type="image/png" href="assets/favicon-32.png">
+
     <link rel="stylesheet" href="css/style.css">
     <script src="js/app.js" defer></script>
 
@@ -22,20 +24,56 @@
 
     <div class="container">
         <aside class="sidebar">
-            <h2>Tarefou</h2>
+            <div class="marca-tarefou">
+                <img src="assets/logo-tarefou.png" alt="Tarefou - Organize suas tarefas">
+            </div>
 
             <nav>
-                <a href="#inicio" class="ativo" data-pagina="inicio">Início</a>
-                <a href="#minhas-tarefas" data-pagina="minhas-tarefas">Minhas tarefas</a>
-                <a href="#calendario" data-pagina="calendario">Calendário</a>
-                <a href="#configuracoes" data-pagina="configuracoes">Configurações</a>
+                <a href="#inicio" class="ativo" data-pagina="inicio">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m3 10 9-7 9 7"/>
+                        <path d="M5 9v12h14V9M9 21v-8h6v8"/>
+                    </svg>
+                    <span>Início</span>
+                </a>
+
+                <a href="#minhas-tarefas" data-pagina="minhas-tarefas">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M9 6h11M9 12h11M9 18h11"/>
+                        <path d="m4 6 1.5 1.5L7.5 5M4 12h3M4 18h3"/>
+                    </svg>
+                    <span>Minhas tarefas</span>
+                </a>
+
+                <a href="#calendario" data-pagina="calendario">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                        <path d="M7 3v4M17 3v4M3 10h18"/>
+                    </svg>
+                    <span>Calendário</span>
+                </a>
+
+                <a href="#configuracoes" data-pagina="configuracoes">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/>
+                        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1.2 1.6V21h-3.6v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.6 15 1.7 1.7 0 0 0 3 13.8H3v-3.6h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.88L4.2 7.06 7.06 4.2l.06.06A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10.2 3H13.8A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.6 1.2v3.6a1.7 1.7 0 0 0-1.6 1.2Z"/>
+                    </svg>
+                    <span>Configurações</span>
+                </a>
             </nav>
         </aside>
 
         <main class="conteudo">
             <header class="topo">
                 <input type="text" id="busca-tarefa" placeholder="Buscar tarefa...">
-                <button>Nova tarefa</button>
+                <button type="button" class="botao-nova-tarefa" aria-label="Nova tarefa">
+                    <span class="simbolo-adicionar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </span>
+                    <span class="texto-adicionar">Nova tarefa</span>
+                </button>
             </header>
 
             <section class="pagina ativa" id="inicio">
@@ -98,7 +136,12 @@
                     <div class="titulo-tarefas">
 
                         <div class="titulo-principal">
-                            <span class="icone-calendario">▦</span>
+                            <span class="icone-inicio">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="m3 10 9-7 9 7"/>
+                                    <path d="M5 9v12h14V9M9 21v-8h6v8"/>
+                                </svg>
+                            </span>
 
                             <div>
                                 <h2>Tarefas de hoje</h2>
@@ -106,7 +149,27 @@
                             </div>
                         </div>
 
-                        <button class="opcoes-tarefas">•••</button>
+                        <div class="menu-tarefas">
+
+                            <button type="button"
+                                    class="opcoes-tarefas"
+                                    id="abrir-opcoes-tarefas"
+                                    aria-label="Opções de tarefas"
+                                    aria-expanded="false">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <circle cx="5" cy="12" r="1.5"/>
+                                    <circle cx="12" cy="12" r="1.5"/>
+                                    <circle cx="19" cy="12" r="1.5"/>
+                                </svg>
+                            </button>
+
+                            <div class="menu-opcoes-tarefas" id="menu-opcoes-tarefas">
+                                <button type="button" id="ver-todas-tarefas">
+                                    Ver todas as tarefas
+                                </button>
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -117,16 +180,24 @@
 
             <section class="minhas-tarefas pagina" id="minhas-tarefas">
 
-                <div class="titulo-tarefas">
+                <div class="titulo-tarefas cabecalho-minhas-tarefas">
 
-                    <div>
-                        <span class="icone-minhas-tarefas">☰</span>
+                    <div class="titulo-principal">
+
+                        <span class="icone-minhas-tarefas">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M9 6h11M9 12h11M9 18h11"/>
+                                <path d="m4 6 1.5 1.5L7.5 5M4 12h3M4 18h3"/>
+                            </svg>
+                        </span>
+
+                        <div>
+                            <h2>Minhas tarefas</h2>
+                            <p>Gerencie todas as suas atividades em um só lugar.</p>
+                        </div>
+
                     </div>
 
-                    <div>
-                        <h2>Minhas tarefas</h2>
-                        <p>Gerencie todas as suas atividades em um só lugar.</p>
-                    </div>
                 </div>
 
                 <div class="controles-tarefas">
@@ -141,7 +212,17 @@
 
                         <div class="seletor-categoria">
 
-                            <span class="icone-categoria">🏷️</span>
+                            <span class="icone-categoria">
+                                <svg viewBox="0 0 24 24" width="18" height="18"
+                                    fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    aria-hidden="true">
+                                    <path d="M20.5 13.5 13.5 20.5a2 2 0 0 1-2.8 0l-8.2-8.2V3h9.3l8.7 8.7a2 2 0 0 1 0 2.8Z"/>
+                                    <circle cx="7.5" cy="7.5" r="1.5"/>
+                                </svg>
+                            </span>
+
+                            <span class="texto-categoria" id="texto-categoria">Todas as categorias</span>
 
                             <select id="categoria-filtro">
                                 <option value="todas">Todas as categorias</option>
@@ -151,7 +232,11 @@
                                 <option value="lazer">Lazer</option>
                             </select>
 
-                            <span class="seta-categoria">⌄</span>
+                            <span class="seta-categoria">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="m6 9 6 6 6-6"/>
+                                </svg>
+                            </span>
 
                         </div>  
 
@@ -166,7 +251,13 @@
             <section class="pagina calendario" id="calendario">
                 <div class="cabecalho-calendario">
                     <div class="titulo-calendario">
-                        <span class="icone-calendario">▦</span>
+                        <span class="icone-calendario">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                <path d="M7 3v4M17 3v4M3 10h18"/>
+                                <path d="m9 15 2 2 4-4"/>
+                            </svg>
+                        </span>
 
                         <div>
                             <h2>Calendário</h2>
@@ -176,16 +267,19 @@
 
                     <div class="seletor-mes-ano">
                          <button type="button" id="mes-anterior" class="seta-mes">
-                            ←
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M17 12H7m0 0 5-5m-5 5 5 5"/>
+                            </svg>
                         </button>
 
                         <button type="button" id="abrir-seletor-data" class="botao-mes-ano">
                             <span id="mes-ano-atual">Novembro de 2026</span>
-                            <span class="seta-baixo">⌄</span>
                         </button>
 
                         <button type="button" id="mes-proximo" class="seta-mes">
-                            →
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M7 12h10m0 0-5-5m5 5-5 5"/>
+                            </svg>
                         </button>
 
                         <div class="seletor-vertical" id="seletor-vertical">
@@ -231,7 +325,11 @@
                                 <p id="quantidade-tarefas-dia">0 tarefas</p>
                             </div>
 
-                            <button type="button" id="voltar-calendario">&#8592;</button>
+                            <button type="button" id="voltar-calendario" aria-label="Fechar dia">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M18 6L6 18M6 6L18 18"></path>
+                                </svg>
+                            </button>
                         </div>
 
                         <div class="lista-tarefas-dia" id="lista-tarefas-dia"></div>
@@ -241,70 +339,156 @@
 
             </section>
 
-            <div class="modal" id="modal-tarefa">
+            <section class="pagina" id="configuracoes">
 
-                <div class="modal-conteudo">
-
-                    <div class="modal-topo">
-                        <h2>Nova tarefa</h2>
-                        <button type="button" id="fechar-modal">&times;</button>
+                <div class="cabecalho-configuracoes">
+                    <div class="icone-configuracoes">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l-2.86 2.86A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1.2 1.6h-3.6A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.88.34l-2.86-2.86A1.7 1.7 0 0 0 4.6 15 1.7 1.7 0 0 0 3 13.8v-3.6A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.88l2.86-2.86A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10.2 3h3.6A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.88-.34l2.86 2.86A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 1.6 1.2v3.6A1.7 1.7 0 0 0 19.4 15Z"/>
+                        </svg>
                     </div>
 
-                    <form id="form-tarefa">
+                    <div>
+                        <h2>Configurações</h2>
+                        <p>Informações e preferências do aplicativo.</p>
+                    </div>
+                </div>
 
-                        <div class="campo">
-                            <label for="nome-tarefa">Nome da tarefa</label>
-                            <input
-                                type="text"
-                                id="nome-tarefa"
-                                placeholder="Ex: Estudar JavaScript"
-                                required
-                            >
+                <div class="grade-configuracoes">
+
+                    <article class="cartao-configuracao">
+                        <div class="icone-cartao">☀</div>
+                        <h3>Aparência</h3>
+                        <p>Tema claro com cores suaves.</p>
+                        <span class="etiqueta-configuracao">Padrão</span>
+                    </article>
+
+                    <article class="cartao-configuracao">
+                        <div class="icone-cartao">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                <path d="M3 5v7c0 1.7 4 3 9 3s9-1.3 9-3V5"/>
+                                <path d="M3 12v7c0 1.7 4 3 9 3s9-1.3 9-3v-7"/>
+                            </svg>
+                        </div>
+                        <h3>Armazenamento</h3>
+                        <p>Suas tarefas ficam salvas neste navegador.</p>
+                        <span class="etiqueta-configuracao">Local</span>
+                    </article>
+
+                    <article class="cartao-configuracao sobre-configuracao">
+                        <div class="icone-cartao">ⓘ</div>
+
+                        <div>
+                            <h3>Sobre o Tarefou</h3>
+                            <p>Organize suas tarefas de maneira simples e prática.</p>
                         </div>
 
-                        <div class="campo">
-                            <label for="descricao-tarefa">Descrição</label>
-                            <textarea
-                                id="descricao-tarefa"
-                                placeholder="Adicione detalhes sobre a tarefa..."
-                            ></textarea>
-                        </div>
-
-                        <div class="campo">
-                            <label for="categoria-tarefa">Categoria</label>
-                            <select id="categoria-tarefa" required>
-                                <option value="">Selecione uma categoria</option>
-                                <option value="estudo">Estudo</option>
-                                <option value="trabalho">Trabalho</option>
-                                <option value="pessoal">Pessoal</option>
-                                <option value="lazer">Lazer</option>
-                            </select>
-                        </div>
-
-                        <div class="campo">
-                            <label for="data-tarefa">Data</label>
-                            <input type="date" id="data-tarefa" required>
-                        </div>
-
-                        <div class="campo">
-                            <label for="horario-tarefa">Horário (opcional)</label>
-                            <input type="time" id="horario-tarefa">
-                        </div>
-
-                        <div class="modal-acoes">
-                            <button type="button" id="cancelar-tarefa">Cancelar</button>
-                            <button type="submit">Salvar tarefa</button>
-                        </div>
-
-                    </form>
+                        <span class="versao-configuracao">v1.0</span>
+                    </article>
 
                 </div>
 
-            </div>
+            </section>
 
+            
         </main>
-
+        
     </div>
     
+    <div class="modal" id="modal-tarefa">
+
+        <div class="modal-conteudo">
+
+            <div class="modal-topo">
+                <h2>Nova tarefa</h2>
+                <button type="button" id="fechar-modal">&times;</button>
+            </div>
+
+            <form id="form-tarefa">
+
+                <div class="campo">
+                    <label for="nome-tarefa">Nome da tarefa</label>
+                    <input
+                        type="text"
+                        id="nome-tarefa"
+                        placeholder="Ex: Estudar JavaScript"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="descricao-tarefa">Descrição</label>
+                    <textarea
+                        id="descricao-tarefa"
+                        placeholder="Adicione detalhes sobre a tarefa..."
+                    ></textarea>
+                </div>
+
+                <div class="campo">
+                    <label for="categoria-tarefa">Categoria</label>
+                    <select id="categoria-tarefa" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="estudo">Estudo</option>
+                        <option value="trabalho">Trabalho</option>
+                        <option value="pessoal">Pessoal</option>
+                        <option value="lazer">Lazer</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="data-tarefa">Data</label>
+                    <input type="date" id="data-tarefa" required>
+                </div>
+
+                <div class="campo">
+                    <label for="horario-tarefa">Horário (opcional)</label>
+                    <input type="time" id="horario-tarefa">
+                </div>
+
+                <div class="modal-acoes">
+                    <button type="button" id="cancelar-tarefa">Cancelar</button>
+                    <button type="submit">Salvar tarefa</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div id="modal-exclusao" class="modal-exclusao">
+        <div class="modal-exclusao-conteudo" role="dialog"
+            aria-modal="true" aria-labelledby="titulo-exclusao">
+
+            <div class="icone-exclusao">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6"/>
+                    <path d="M10 11v6M14 11v6"/>
+                </svg>
+            </div>
+
+            <h2 id="titulo-exclusao">Excluir tarefa?</h2>
+
+            <p>
+                Tem certeza de que deseja excluir esta tarefa?
+                Essa ação não poderá ser desfeita.
+            </p>
+
+            <div class="botoes-exclusao">
+                <button type="button" id="cancelar-exclusao">
+                    Cancelar
+                </button>
+
+                <button type="button" id="confirmar-exclusao">
+                    Sim, excluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notificacoes" aria-live="polite"></div>
+
 </body>
 </html>
