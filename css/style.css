@@ -38,7 +38,7 @@ body {
     margin: auto;
 }
 
-#minhas-tareafs {
+#minhas-tarefas {
     min-height: 0;
 }
 
@@ -473,30 +473,70 @@ body {
 }
 
 .controles-tarefas .filtros {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 0;
+    min-width: 0;
 }
 
 .controles-tarefas .filtros button {
-    padding: 10px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 42px;
+    padding: 10px 15px;
     border: 1px solid #FFFFFF80;
     border-radius: 25px;
-    background: #6496be26;
+    background: #6496BE26;
     color: #164574;
+    font-family: inherit;
     font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .controles-tarefas .filtros button:hover {
-    background: #88e8f0;
+    background: #88E8F0;
     transform: translateY(-2px);
 }
 
 .controles-tarefas .filtros button.ativo {
-    border-color: #08b9c5;
-    background: #08b9c5;
-    color: white;
-    box-shadow: 0 4px 12px #08b9c533;
+    border-color: #08B9C5;
+    background: #08B9C5;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px #08B9C533;
+}
+
+.controles-tarefas .filtros button svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.controles-tarefas .filtros .quantidade-filtro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 21px;
+    height: 21px;
+    padding: 0 5px;
+    border-radius: 12px;
+    background: #16457412;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.controles-tarefas .filtros button.ativo .quantidade-filtro {
+    background: #FFFFFF30;
 }
 
 .filtro-categoria {
@@ -1188,6 +1228,52 @@ body {
         border-radius: 8px;
         font-size: 12px;
     }
+
+    #grade-calendario {
+        grid-auto-rows: auto;
+    }
+
+    #grade-calendario button {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        min-height: 0;
+        padding: 4px;
+        border-radius: 9px;
+    }
+
+    #grade-calendario button {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        padding: 3px;
+    }
+
+    #grade-calendario .numero-dia {
+        line-height: 1;
+    }
+
+    #grade-calendario .indicadores-dia {
+        position: static;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 3px;
+        width: auto;
+        height: auto;
+        margin: 0;
+        transform: none;
+    }
+
+    #grade-calendario .bolinha-categoria {
+        position: static;
+        flex-shrink: 0;
+        width: 5px;
+        height: 5px;
+        margin: 0;
+    }
 }
 
 .seletor-mes-ano .seta-mes:hover {
@@ -1827,10 +1913,8 @@ body {
     align-items: stretch;
     width: 100%;
     gap: 10px;
-
-    max-height: 424px;
-    overflow-y: auto;
-    padding-right: 8px;
+    overflow: visible;
+    padding-right: 0;
 }
 
 .minhas-tarefas .tarefa {
@@ -1952,6 +2036,123 @@ body {
     .topo .botao-nova-tarefa .texto-adicionar {
         max-width: 130px;
         opacity: 1;
+    }
+}
+
+@media (min-width: 851px) {
+    #inicio .tarefas .titulo-tarefas {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #A9D8E8;
+    }
+    #inicio .tarefas .titulo-principal {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+    }
+    #inicio .tarefas .titulo-principal > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 0;
+    }
+    #inicio .tarefas .icone-inicio {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+    }
+    #inicio .tarefas .titulo-principal h2 {
+        margin: 0;
+        color: #164574;
+        font-size: 21px;
+        line-height: 1.3;
+    }
+    #inicio .tarefas .data-cabecalho {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    #inicio .tarefas .data-cabecalho svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+        fill: none;
+        stroke: #456B91;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    #inicio .tarefas #data-hoje {
+        margin: 0;
+        color: #64819B;
+        font-size: 12px;
+    }
+    #inicio .tarefas .menu-tarefas {
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 850px) {
+    #inicio .tarefas .titulo-tarefas {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 16px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid #A9D8E8;
+    }
+    #inicio .tarefas .titulo-principal {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+    }
+    #inicio .tarefas .titulo-principal > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 0;
+    }
+    #inicio .tarefas .icone-inicio {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+    }
+    #inicio .tarefas .titulo-principal h2 {
+        margin: 0;
+        font-size: 21px;
+        line-height: 1.3;
+    }
+    #inicio .tarefas .data-cabecalho {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    #inicio .tarefas .data-cabecalho svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+        fill: none;
+        stroke: #456B91;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    #inicio .tarefas #data-hoje {
+        margin: 0;
+        font-size: 12px;
+        color: #64819B;
+    }
+    #inicio .tarefas .menu-tarefas {
+        margin-left: auto;
+        flex-shrink: 0;
     }
 }
 
@@ -2332,10 +2533,6 @@ body {
     letter-spacing: -0.2px;
 }
 
-/* =================================
-   MODAL DE EXCLUSÃO
-================================= */
-
 .modal-exclusao {
     display: none;
     position: fixed;
@@ -2433,4 +2630,590 @@ body {
 #confirmar-exclusao:hover {
     background: #A92F40;
     transform: translateY(-2px);
+}
+
+.botao-menu-mobile {
+    display: none;
+}
+
+@media (max-width: 850px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+        min-height: calc(100vh - 24px);
+    }
+
+    .sidebar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        align-content: center;
+        gap: 0 12px;
+        padding: 18px 14px;
+    }
+
+    .marca-tarefou {
+        margin: 0;
+    }
+
+    .marca-tarefou img {
+        width: 150px;
+    }
+
+    .marca-tarefou::before {
+        width: 160px;
+        height: 80px;
+    }
+
+    .botao-menu-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 42px;
+        height: 42px;
+
+        border: 1px solid #FFFFFFCC;
+        border-radius: 12px;
+
+        background: #FFFFFF99;
+        color: #164574;
+        cursor: pointer;
+    }
+
+    .botao-menu-mobile svg {
+        width: 23px;
+        height: 23px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+
+    .sidebar nav {
+        display: none;
+        width: 100%;
+        padding-top: 12px;
+    }
+
+    .sidebar nav.menu-aberto {
+        display: flex;
+    }
+
+    .conteudo {
+        min-width: 0;
+        padding: 18px;
+    }
+
+    .resumo {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    }
+
+    .boas-vindas {
+        width: 100%;
+    }
+
+    .boas-vindas h1 {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .boas-vindas p {
+        font-size: 14px;
+    }
+
+    .contadores {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        width: 100%;
+    }
+
+    .contador {
+        min-width: 0;
+        padding: 12px 8px;
+    }
+
+    .conteudo {
+        min-width: 0;
+    }
+
+    .topo input {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .contador span {
+        font-size: 11px;
+    }
+
+    .contador strong {
+        font-size: 20px;
+    }
+}
+
+#minhas-tarefas .menu-acoes-tarefa {
+    position: relative;
+}
+#minhas-tarefas .botao-opcoes-tarefa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #FFFFFFCC;
+    border-radius: 10px;
+    background: #FFFFFF99;
+    color: #164574;
+    cursor: pointer;
+}
+#minhas-tarefas .botao-opcoes-tarefa svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    stroke: none;
+}
+#minhas-tarefas .botao-opcoes-tarefa:hover {
+    background: #DDF8FA;
+}
+
+#minhas-tarefas .lista-opcoes-tarefa {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 6px);
+    z-index: 20;
+    width: 170px;
+    padding: 5px;
+    border: 1px solid #FFFFFFCC;
+    border-radius: 14px;
+    background: #F8FCFE;
+    box-shadow: 0 8px 22px #16457426;
+}
+#minhas-tarefas .lista-opcoes-tarefa.aberto {
+    display: flex;
+    flex-direction: column;
+}
+#minhas-tarefas .lista-opcoes-tarefa button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer;
+}
+#minhas-tarefas .lista-opcoes-tarefa button svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+}
+#minhas-tarefas .lista-opcoes-tarefa .editar-tarefa {
+    color: #164574;
+    border-bottom: 1px solid #DCE7EF;
+    border-radius: 8px 8px 0 0;
+}
+#minhas-tarefas .lista-opcoes-tarefa .editar-tarefa:hover {
+    background: #DCEEF5;
+}
+#minhas-tarefas .lista-opcoes-tarefa .excluir-tarefa {
+    color: #D94C70;
+    border-radius: 0 0 8px 8px;
+}
+#minhas-tarefas .lista-opcoes-tarefa .excluir-tarefa:hover {
+    background: #FCE4E4;
+}
+
+@media (max-width: 480px) {
+    .contador {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-width: 0;
+        padding: 12px 4px;
+        text-align: center;
+    }
+
+    .dados-contador {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 0;
+    }
+
+    .contador span {
+        font-size: 11px;
+    }
+
+    .contador strong {
+        margin-top: 3px;
+        font-size: 20px;
+    }
+
+    #inicio #lista-tarefas-hoje .tarefa {
+        display: grid;
+        grid-template-columns: 32px minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto;
+        gap: 5px 10px;
+        align-items: center;
+        flex-shrink: 0;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding: 12px;
+    }
+    #inicio #lista-tarefas-hoje .concluir-tarefa {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    #inicio #lista-tarefas-hoje .informacoes-tarefa {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+    }
+    #inicio #lista-tarefas-hoje .categoria {
+        grid-column: 3;
+        grid-row: 1;
+        padding: 5px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+    #inicio #lista-tarefas-hoje .data-tarefa,
+    #inicio #lista-tarefas-hoje .horario {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        min-width: 0;
+        color: #456B91;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+    #inicio #lista-tarefas-hoje .data-tarefa {
+        grid-column: 2 / 4;
+        grid-row: 2;
+    }
+    #inicio #lista-tarefas-hoje .horario {
+        grid-column: 2 / 4;
+        grid-row: 3;
+    }
+    #inicio #lista-tarefas-hoje .icone-data,
+    #inicio #lista-tarefas-hoje .icone-horario {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+
+    #inicio .tarefas .titulo-tarefas {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr) 38px;
+        grid-template-rows: auto auto;
+        column-gap: 12px;
+        row-gap: 5px;
+        align-items: center;
+        padding-bottom: 16px;
+        margin-bottom: 18px;
+        border-bottom: 1px solid #A9D8E8;
+    }
+    #inicio .tarefas .titulo-tarefas .titulo-principal {
+        display: contents;
+    }
+    #inicio .tarefas .titulo-principal > div {
+        display: contents;
+    }
+    #inicio .tarefas .icone-inicio {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        width: 42px;
+        height: 48px;
+        align-self: center;
+    }
+    #inicio .tarefas .titulo-principal h2 {
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0;
+        font-size: 19px;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+    #inicio .tarefas .data-cabecalho {
+        grid-column: 2;
+        grid-row: 2;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        min-width: 0;
+    }
+    #inicio .tarefas .data-cabecalho svg {
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+        fill: none;
+        stroke: #456B91;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+    #inicio .tarefas #data-hoje {
+        margin: 0;
+        font-size: 10px;
+        line-height: 1.4;
+        letter-spacing: -0.3px;
+        white-space: nowrap;
+    }
+    #inicio .tarefas .menu-tarefas {
+        grid-column: 3;
+        grid-row: 1 / 3;
+        justify-self: end;
+        align-self: center;
+    }
+    #inicio .tarefas .opcoes-tarefas {
+        width: 38px;
+        height: 38px;
+    }
+
+    #minhas-tarefas {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    #minhas-tarefas .controles-tarefas {
+        margin-left: -4px;
+        margin-right: -4px;
+    }
+    #minhas-tarefas .controles-tarefas .filtros {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.1fr) minmax(0, 1.2fr);
+        gap: 4px;
+        width: 100%;
+    }
+    #minhas-tarefas .controles-tarefas .filtros button {
+        gap: 3px;
+        min-width: 0;
+        padding: 8px 3px;
+        font-size: 11px;
+        letter-spacing: -0.3px;
+    }
+    #minhas-tarefas .controles-tarefas .filtros button svg {
+        width: 12px;
+        height: 12px;
+    }
+    #minhas-tarefas .controles-tarefas .filtros .quantidade-filtro {
+        min-width: 17px;
+        height: 17px;
+        padding: 0 3px;
+        font-size: 10px;
+    }
+
+    #minhas-tarefas .lista-tarefas {
+        width: 100%;
+        padding-right: 0;
+        gap: 12px;
+    }
+    #minhas-tarefas .tarefa {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto;
+        column-gap: 10px;
+        row-gap: 7px;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        min-height: 130px;
+        padding: 14px 12px;
+        border-radius: 18px;
+        flex-shrink: 0;
+    }
+    #minhas-tarefas .concluir-tarefa {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: center;
+        width: 32px;
+        height: 32px;
+    }
+    #minhas-tarefas .informacoes-tarefa {
+        grid-column: 2;
+        grid-row: 1;
+        min-width: 0;
+        width: 100%;
+    }
+    #minhas-tarefas .informacoes-tarefa h3 {
+        margin-bottom: 5px;
+        font-size: 15px;
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+    }
+    #minhas-tarefas .informacoes-tarefa p {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        font-size: 12px;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+    #minhas-tarefas .categoria {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: end;
+        max-width: 100%;
+        padding: 6px 9px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+    #minhas-tarefas .data-tarefa,
+    #minhas-tarefas .horario {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        min-width: 0;
+        font-size: 11px;
+        color: #456B91;
+    }
+    #minhas-tarefas .data-tarefa {
+        grid-column: 2 / 4;
+        grid-row: 2;
+    }
+    #minhas-tarefas .horario {
+        grid-column: 2;
+        grid-row: 3;
+    }
+    #minhas-tarefas .icone-data,
+    #minhas-tarefas .icone-horario {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+
+    #minhas-tarefas .acoes-tarefa {
+        grid-column: 3;
+        grid-row: 3;
+        display: flex;
+        justify-self: end;
+        align-self: center;
+        margin: 0;
+    }
+}
+
+@media (max-width: 850px) {
+    .calendario-layout.dia-aberto {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .calendario-layout.dia-aberto .calendario-mensal {
+        width: 100%;
+        min-width: 0;
+    }
+    .calendario-layout.dia-aberto .painel-dia {
+        width: 100%;
+        min-width: 0;
+        max-height: none;
+    }
+}
+
+/* Seletores exclusivos do calendário mobile */
+.seletores-calendario-mobile {
+    display: none;
+}
+
+@media (max-width: 850px) {
+    .cabecalho-calendario .seletor-mes-ano {
+        display: none;
+    }
+
+    .seletores-calendario-mobile {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 12px;
+        width: 100%;
+    }
+
+    .campo-seletor-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        min-width: 0;
+    }
+
+    .campo-seletor-mobile label {
+        color: #456B91;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .campo-seletor-mobile select {
+        width: 100%;
+        min-width: 0;
+        padding: 12px;
+        border: 1px solid #FFFFFFCC;
+        border-radius: 12px;
+        background: #FFFFFFCC;
+        color: #164574;
+        font-family: 'Inter', Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .campo-seletor-mobile select:focus {
+        outline: 2px solid #08B9C6;
+        outline-offset: 2px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 850px) {
+    .marca-tarefou img {
+        width: 135px;
+    }
+    .botao-menu-mobile {
+        width: 38px;
+        height: 38px;
+    }
+
+    .container {
+        min-height: calc(100vh - 100px);
+        align-content: start;
+    }
+    .conteudo {
+        min-height: calc(100vh - 100px);
+        align-self: stretch;
+    }
+}
+
+@media (min-width: 851px) and (max-width: 1100px) {
+    #inicio .resumo {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+    }
+    #inicio .saudacao {
+        width: 100%;
+        max-width: none;
+    }
+    #inicio .saudacao h1 {
+        white-space: normal;
+    }
+    #inicio .cards-resumo {
+        width: 100%;
+    }
 }

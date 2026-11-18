@@ -1,6 +1,19 @@
 const linksMenu = document.querySelectorAll('.sidebar nav a');
 const paginas = document.querySelectorAll('.pagina');
 
+const botaoMenuMobile = document.getElementById('botao-menu-mobile');
+const menuNavegacao = document.getElementById('menu-navegacao');
+
+botaoMenuMobile.addEventListener('click', () => {
+    const aberto = menuNavegacao.classList.toggle('menu-aberto');
+
+    botaoMenuMobile.setAttribute('aria-expanded', String(aberto));
+    botaoMenuMobile.setAttribute(
+        'aria-label',
+        aberto ? 'Fechar menu' : 'Abrir menu'
+    );
+});
+
 const modalExclusao = document.getElementById('modal-exclusao');
 const cancelarExclusao = document.getElementById('cancelar-exclusao');
 const confirmarExclusao = document.getElementById('confirmar-exclusao');
@@ -30,6 +43,10 @@ linksMenu.forEach(link => {
         });
 
         link.classList.add('ativo');
+
+        menuNavegacao.classList.remove('menu-aberto');
+        botaoMenuMobile.setAttribute('aria-expanded', 'false');
+        botaoMenuMobile.setAttribute('aria-label', 'Abrir menu');
 
     });
 
@@ -202,8 +219,18 @@ campoBusca.addEventListener('input', () => {
     atualizarInicio();
 });
 
+function atualizarContadoresFiltros() {
+    const total = tarefas.length;
+    const pendentes = tarefas.filter(tarefa => !tarefa.concluida).length;
+    const concluidas = total - pendentes;
+    document.getElementById('quantidade-filtro-todas').textContent = total;
+    document.getElementById('quantidade-filtro-pendentes').textContent = pendentes;
+    document.getElementById('quantidade-filtro-concluidas').textContent = concluidas;
+}
+
 const listaMinhasTarefas = document.getElementById('lista-minhas-tarefas');
 function exibirTarefas(filtro = 'todas') {
+    atualizarContadoresFiltros();
     listaMinhasTarefas.innerHTML = '';
     const tarefasFiltradas = tarefas.filter(tarefa => {
         let correspondenteStatus = true;
@@ -293,18 +320,31 @@ function exibirTarefas(filtro = 'todas') {
             </span>
 
             <div class="acoes-tarefa">
-                <button class="editar-tarefa" type="button" aria-label="Editar tarefa">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="m14 6 4 4M4 20l4-.8L19 8a2.8 2.8 0 0 0-4-4L4 15z"/>
-                    </svg>
-                </button>
-
-                <button class="excluir-tarefa" type="button" aria-label="Excluir tarefa">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6"/>
-                        <path d="M10 11v6M14 11v6"/>
-                    </svg>
-                </button>
+                <div class="menu-acoes-tarefa">
+                    <button class="botao-opcoes-tarefa" type="button" aria-label="Opções da tarefa" aria-expanded="false">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="5" cy="12" r="1.5"/>
+                            <circle cx="12" cy="12" r="1.5"/>
+                            <circle cx="19" cy="12" r="1.5"/>
+                        </svg>
+                    </button>
+                    <div class="lista-opcoes-tarefa">
+                        <button class="editar-tarefa" type="button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 20h9"/>
+                                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/>
+                            </svg>
+                            <span>Editar tarefa</span>
+                        </button>
+                        <button class="excluir-tarefa" type="button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6"/>
+                                <path d="M10 11v6M14 11v6"/>
+                            </svg>
+                            <span>Excluir tarefa</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         `;
 
@@ -318,6 +358,21 @@ function exibirTarefas(filtro = 'todas') {
             gerarCalendario();
         });
  
+        const botaoOpcoes = elementoTarefa.querySelector('.botao-opcoes-tarefa');
+        const menuOpcoes = elementoTarefa.querySelector('.lista-opcoes-tarefa');
+        botaoOpcoes.addEventListener('click', (evento) => {
+            evento.stopPropagation();
+            const estavaAberto = menuOpcoes.classList.contains('aberto');
+            document.querySelectorAll('#minhas-tarefas .lista-opcoes-tarefa.aberto').forEach(menu => {
+                menu.classList.remove('aberto');
+                menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+            });
+            if (!estavaAberto) {
+                menuOpcoes.classList.add('aberto');
+                botaoOpcoes.setAttribute('aria-expanded', 'true');
+            }
+        });
+
         const botaoEditar = elementoTarefa.querySelector('.editar-tarefa');
 
         botaoEditar.addEventListener('click', () => {
@@ -345,7 +400,16 @@ function exibirTarefas(filtro = 'todas') {
 
         listaMinhasTarefas.appendChild(elementoTarefa);
         });
-        }
+}
+
+document.addEventListener('click', (evento) => {
+    if (!evento.target.closest('#minhas-tarefas .menu-acoes-tarefa')) {
+        document.querySelectorAll('#minhas-tarefas .lista-opcoes-tarefa.aberto').forEach(menu => {
+            menu.classList.remove('aberto');
+            menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+        });
+    }
+});
 
 function mensagemSemAtividades() {
     return `
@@ -426,8 +490,12 @@ function atualizarInicio(mostrarComemoracao = false) {
         year: 'numeric'    
     });
 
+    const diaSemana = agora.toLocaleDateString('pt-BR', {
+        weekday: 'long'
+    });
+
     document.getElementById('data-hoje').textContent =
-        `Suas atividades para hoje, ${dataFormatada}.`;
+        `${diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1)}, ${dataFormatada}`;
 
     const total = tarefas.length;        
     const concluidas = tarefas.filter(tarefa => tarefa.concluida).length;
@@ -451,7 +519,16 @@ function atualizarInicio(mostrarComemoracao = false) {
             return tarefa.nome.toLowerCase().includes(termoBusca) ||
                 (tarefa.descricao || '').toLowerCase().includes(termoBusca);
         });
-    
+
+        tarefasHoje.sort((a, b) => {
+            const horarioA = a.horario || '23:59';
+            const horarioB = b.horario || '23:59';
+
+            return horarioA.localeCompare(horarioB);
+        });
+
+        const tarefasVisiveis = tarefasHoje;
+        
     const listaHoje = document.getElementById('lista-tarefas-hoje');
 
     listaHoje.innerHTML = '';
@@ -484,7 +561,7 @@ function atualizarInicio(mostrarComemoracao = false) {
         return;
     }
 
-    tarefasHoje.forEach(tarefa => {
+    tarefasVisiveis.forEach(tarefa => {
         const elemento = document.createElement('div');
 
         elemento.classList.add('tarefa');
@@ -591,6 +668,28 @@ let diaAberto = false;
 const anoMinimo = 2020;
 const anoMaximo = 2050;
 
+const seletorMesMobile = document.getElementById('mes-mobile');
+const seletorAnoMobile = document.getElementById('ano-mobile');
+
+for (let ano = anoMinimo; ano <= anoMaximo; ano++) {
+    const opcao = document.createElement('option');
+    opcao.value = ano;
+    opcao.textContent = ano;
+    seletorAnoMobile.appendChild(opcao);
+}
+
+seletorMesMobile.addEventListener('change', () => {
+    mesAtual = Number(seletorMesMobile.value);
+    ajustarDiaSelecionado();
+    gerarCalendario();
+});
+
+seletorAnoMobile.addEventListener('change', () => {
+    anoAtual = Number(seletorAnoMobile.value);
+    ajustarDiaSelecionado();
+    gerarCalendario();
+});
+
 const gradeCalendario = document.getElementById('grade-calendario');
 const calendarioLayout = document.getElementById('calendario-layout');
 
@@ -656,6 +755,9 @@ function gerarCalendario() {
 
         anoProximoTexto.style.visibility =
             anoAtual >= anoMaximo ? 'hidden' : 'visible';
+
+    seletorMesMobile.value = String(mesAtual);
+    seletorAnoMobile.value = String(anoAtual);
 
     const dataEscolhida = formatarDataISO(dataSelecionada);
 
@@ -745,11 +847,14 @@ function exibirTarefasDoDia() {
     listaDia.innerHTML = '';
 
     if (tarefasDoDia.length === 0) {
-        listaDia.innerHTML =
-            '<p class="sem-tarefas">Nenhuma tarefa para este dia.</p>';
+        listaDia.innerHTML = `
+            <div class="mensagem-vazia">
+                <h3>Nenhuma tarefa para este dia</h3>
+                <p>Você não possui atividades agendadas para esta data.</p>
+            </div>
+        `;
         return;
     }
-
     tarefasDoDia.forEach(tarefa => {
         const elemento = document.createElement('div');
 

@@ -28,7 +28,20 @@
                 <img src="assets/logo-tarefou.png" alt="Tarefou - Organize suas tarefas">
             </div>
 
-            <nav>
+            <button
+                type="button"
+                class="botao-menu-mobile"
+                id="botao-menu-mobile"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+                aria-controls="menu-navegacao"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 7h16M4 12h16M4 17h16"/>
+                </svg>
+            </button>
+
+            <nav id="menu-navegacao">
                 <a href="#inicio" class="ativo" data-pagina="inicio">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="m3 10 9-7 9 7"/>
@@ -145,7 +158,14 @@
 
                             <div>
                                 <h2>Tarefas de hoje</h2>
-                                <p id="data-hoje"></p>
+                                <div class="data-cabecalho">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="16" rx="2"/>
+                                        <path d="M8 3v4M16 3v4M3 10h18"/>
+                                    </svg>
+
+                                    <p id="data-hoje"></p>
+                                </div>
                             </div>
                         </div>
 
@@ -203,9 +223,29 @@
                 <div class="controles-tarefas">
 
                     <div class="filtros">
-                        <button class="filtro ativo" data-filtro="todas">Todas</button>
-                        <button class="filtro" data-filtro="pendentes">Pendentes</button>
-                        <button class="filtro" data-filtro="concluidas">Concluídas</button>
+                        <button type="button" class="filtro ativo" data-filtro="todas">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 7h16M4 12h16M4 17h16"/>
+                            </svg>
+                            <span>Todas</span>
+                            <span class="quantidade-filtro" id="quantidade-filtro-todas">0</span>
+                        </button>
+                        <button type="button" class="filtro" data-filtro="pendentes">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9"/>
+                                <path d="M12 7v5l3 2"/>
+                            </svg>
+                            <span>Pendentes</span>
+                            <span class="quantidade-filtro" id="quantidade-filtro-pendentes">0</span>
+                        </button>
+                        <button type="button" class="filtro" data-filtro="concluidas">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9"/>
+                                <path d="m8 12 3 3 5-6"/>
+                            </svg>
+                            <span>Concluídas</span>
+                            <span class="quantidade-filtro" id="quantidade-filtro-concluidas">0</span>
+                        </button>
                     </div>
 
                     <div class="filtro-categoria">
@@ -298,7 +338,32 @@
 
                         </div>
                     </div>
-                                        
+                      
+                    <div class="seletores-calendario-mobile">
+                        <div class="campo-seletor-mobile">
+                            <label for="mes-mobile">Mês</label>
+                            <select id="mes-mobile">
+                                <option value="0">Janeiro</option>
+                                <option value="1">Fevereiro</option>
+                                <option value="2">Março</option>
+                                <option value="3">Abril</option>
+                                <option value="4">Maio</option>
+                                <option value="5">Junho</option>
+                                <option value="6">Julho</option>
+                                <option value="7">Agosto</option>
+                                <option value="8">Setembro</option>
+                                <option value="9">Outubro</option>
+                                <option value="10">Novembro</option>
+                                <option value="11">Dezembro</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-seletor-mobile">
+                            <label for="ano-mobile">Ano</label>
+                            <select id="ano-mobile"></select>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="calendario-layout" id="calendario-layout">
