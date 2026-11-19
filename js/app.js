@@ -83,6 +83,13 @@ function salvarTarefas() {
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
 }
 
+function atualizarAplicativo(mostrarComemoracao = false) {
+    salvarTarefas();
+    atualizarInicio(mostrarComemoracao);
+    exibirTarefas(filtroAtual);
+    gerarCalendario();
+}
+
 function mostrarNotificacao(tipo) {
     const mensagens = {
         criar: {
@@ -170,7 +177,19 @@ formularioTarefa.addEventListener('submit', (evento) => {
         categoria: document.getElementById('categoria-tarefa').value,
         data: document.getElementById('data-tarefa').value,
         horario: document.getElementById('horario-tarefa').value
-};
+    };
+
+    const tarefaDuplicada = tarefas.some(tarefa =>
+        tarefa.nome.trim().toLowerCase() === dadosTarefa.nome.trim().toLowerCase() &&
+        tarefa.data === dadosTarefa.data &&
+        tarefa.categoria === dadosTarefa.categoria &&
+        tarefa.id !== idTarefaEditando
+    );
+
+    if (tarefaDuplicada) {
+        alert('Já existe uma tarefa com esse nome, data e categoria.');
+        return;
+    }
 
     const tipoNotificacao = idTarefaEditando !== null
         ? 'editar'
@@ -181,8 +200,13 @@ formularioTarefa.addEventListener('submit', (evento) => {
             tarefa => tarefa.id === idTarefaEditando
         );
 
+        if (!tarefaSelecionada) {
+            alert('Não foi possível encontrar a tarefa.');
+            return;
+        }
+
         Object.assign(tarefaSelecionada, dadosTarefa);
-    
+
     } else {
 
         const novaTarefa = {
@@ -196,15 +220,11 @@ formularioTarefa.addEventListener('submit', (evento) => {
 
     idTarefaEditando = null;
 
-    salvarTarefas();
+    atualizarAplicativo();
 
     mostrarNotificacao(tipoNotificacao);
     formularioTarefa.reset();
     modalTarefa.style.display = 'none';
-
-    atualizarInicio();
-    exibirTarefas(filtroAtual);
-    gerarCalendario();
 
 });
 
@@ -352,10 +372,7 @@ function exibirTarefas(filtro = 'todas') {
         botaoConcluir.addEventListener('click', () => {
             tarefa.concluida = !tarefa.concluida;
 
-            salvarTarefas();
-            atualizarInicio(true);
-            exibirTarefas(filtroAtual);
-            gerarCalendario();
+            atualizarAplicativo(true);
         });
  
         const botaoOpcoes = elementoTarefa.querySelector('.botao-opcoes-tarefa');
@@ -527,8 +544,6 @@ function atualizarInicio(mostrarComemoracao = false) {
             return horarioA.localeCompare(horarioB);
         });
 
-        const tarefasVisiveis = tarefasHoje;
-        
     const listaHoje = document.getElementById('lista-tarefas-hoje');
 
     listaHoje.innerHTML = '';
@@ -561,7 +576,7 @@ function atualizarInicio(mostrarComemoracao = false) {
         return;
     }
 
-    tarefasVisiveis.forEach(tarefa => {
+    tarefasHoje.forEach(tarefa => {
         const elemento = document.createElement('div');
 
         elemento.classList.add('tarefa');
@@ -607,10 +622,7 @@ function atualizarInicio(mostrarComemoracao = false) {
         elemento.querySelector('.concluir-tarefa').addEventListener('click', () => {
             tarefa.concluida = !tarefa.concluida;
 
-            salvarTarefas();
-            atualizarInicio(true);
-            exibirTarefas(filtroAtual);
-            gerarCalendario();
+            atualizarAplicativo(true);
         });
 
         listaHoje.appendChild(elemento);
@@ -880,10 +892,7 @@ function exibirTarefasDoDia() {
         elemento.querySelector('.concluir-calendario').addEventListener('click', () => {
             tarefa.concluida = !tarefa.concluida;
 
-            salvarTarefas();
-            atualizarInicio(true);
-            exibirTarefas(filtroAtual);
-            gerarCalendario();
+            atualizarAplicativo(true);
         });
 
         listaDia.appendChild(elemento);
@@ -903,11 +912,8 @@ confirmarExclusao.addEventListener('click', () => {
     modalExclusao.style.display = 'none';
     idTarefaExcluindo = null;
 
-    salvarTarefas();
+    atualizarAplicativo();
     mostrarNotificacao('excluir');
-    atualizarInicio();
-    exibirTarefas(filtroAtual);
-    gerarCalendario();
 });
 
 modalExclusao.addEventListener('click', (evento) => {

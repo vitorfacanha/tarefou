@@ -7,12 +7,12 @@
     <title>Tarefou | Organize suas tarefas</title>
     <link rel="icon" type="image/png" href="assets/favicon-32.png">
 
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js" defer></script>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+   
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
 </head>
 <body>
     
@@ -23,6 +23,7 @@
     </div>
 
     <div class="container">
+
         <aside class="sidebar">
             <div class="marca-tarefou">
                 <img src="assets/logo-tarefou.png" alt="Tarefou - Organize suas tarefas">
@@ -77,8 +78,10 @@
         </aside>
 
         <main class="conteudo">
+
             <header class="topo">
                 <input type="text" id="busca-tarefa" placeholder="Buscar tarefa...">
+                
                 <button type="button" class="botao-nova-tarefa" aria-label="Nova tarefa">
                     <span class="simbolo-adicionar">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -92,14 +95,12 @@
             <section class="pagina ativa" id="inicio">
                 
                 <section class="resumo">
-
                     <div class="boas-vindas">
                         <h1 id="saudacao">Olá!</h1>
                         <p>Organize seu dia, uma tarefa de cada vez.</p>
                     </div>
 
                     <div class="contadores">
-
                         <div class="contador">
                             <div class="icone-contador total">
                                 <svg viewBox="0 0 24 24">
@@ -139,15 +140,11 @@
                                 <strong id="tarefas-concluidas">0</strong>
                             </div>
                         </div>
-
                     </div>
-
                 </section>
 
                 <section class="tarefas">
-
                     <div class="titulo-tarefas">
-
                         <div class="titulo-principal">
                             <span class="icone-inicio">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -163,19 +160,19 @@
                                         <rect x="3" y="5" width="18" height="16" rx="2"/>
                                         <path d="M8 3v4M16 3v4M3 10h18"/>
                                     </svg>
-
                                     <p id="data-hoje"></p>
                                 </div>
                             </div>
                         </div>
 
                         <div class="menu-tarefas">
-
-                            <button type="button"
-                                    class="opcoes-tarefas"
-                                    id="abrir-opcoes-tarefas"
-                                    aria-label="Opções de tarefas"
-                                    aria-expanded="false">
+                            <button
+                                type="button"
+                                class="opcoes-tarefas"
+                                id="abrir-opcoes-tarefas"
+                                aria-label="Opções de tarefas"
+                                aria-expanded="false"
+                            >
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <circle cx="5" cy="12" r="1.5"/>
                                     <circle cx="12" cy="12" r="1.5"/>
@@ -188,22 +185,17 @@
                                     Ver todas as tarefas
                                 </button>
                             </div>
-
                         </div>
-
                     </div>
 
                     <div class="lista-tarefas" id="lista-tarefas-hoje"></div>
                 </section>
-                
             </section>
 
             <section class="minhas-tarefas pagina" id="minhas-tarefas">
 
                 <div class="titulo-tarefas cabecalho-minhas-tarefas">
-
                     <div class="titulo-principal">
-
                         <span class="icone-minhas-tarefas">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path d="M9 6h11M9 12h11M9 18h11"/>
@@ -215,13 +207,10 @@
                             <h2>Minhas tarefas</h2>
                             <p>Gerencie todas as suas atividades em um só lugar.</p>
                         </div>
-
                     </div>
-
                 </div>
 
                 <div class="controles-tarefas">
-
                     <div class="filtros">
                         <button type="button" class="filtro ativo" data-filtro="todas">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -230,6 +219,7 @@
                             <span>Todas</span>
                             <span class="quantidade-filtro" id="quantidade-filtro-todas">0</span>
                         </button>
+
                         <button type="button" class="filtro" data-filtro="pendentes">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <circle cx="12" cy="12" r="9"/>
@@ -238,6 +228,7 @@
                             <span>Pendentes</span>
                             <span class="quantidade-filtro" id="quantidade-filtro-pendentes">0</span>
                         </button>
+
                         <button type="button" class="filtro" data-filtro="concluidas">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <circle cx="12" cy="12" r="9"/>
@@ -249,20 +240,27 @@
                     </div>
 
                     <div class="filtro-categoria">
-
                         <div class="seletor-categoria">
-
                             <span class="icone-categoria">
-                                <svg viewBox="0 0 24 24" width="18" height="18"
-                                    fill="none" stroke="currentColor" stroke-width="1.8"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    aria-hidden="true">
+                                <svg 
+                                    viewBox="0 0 24 24" 
+                                    width="18" 
+                                    height="18"
+                                    fill="none" 
+                                    stroke="currentColor" 
+                                    stroke-width="1.8"
+                                    stroke-linecap="round" 
+                                    stroke-linejoin="round"
+                                    aria-hidden="true"
+                                >
                                     <path d="M20.5 13.5 13.5 20.5a2 2 0 0 1-2.8 0l-8.2-8.2V3h9.3l8.7 8.7a2 2 0 0 1 0 2.8Z"/>
                                     <circle cx="7.5" cy="7.5" r="1.5"/>
                                 </svg>
                             </span>
 
-                            <span class="texto-categoria" id="texto-categoria">Todas as categorias</span>
+                            <span class="texto-categoria" id="texto-categoria">
+                                Todas as categorias
+                            </span>
 
                             <select id="categoria-filtro">
                                 <option value="todas">Todas as categorias</option>
@@ -277,18 +275,15 @@
                                     <path d="m6 9 6 6 6-6"/>
                                 </svg>
                             </span>
-
                         </div>  
-
                     </div>
-
                 </div>
 
                 <div class="lista-tarefas" id="lista-minhas-tarefas"></div>
-
             </section>
 
             <section class="pagina calendario" id="calendario">
+                
                 <div class="cabecalho-calendario">
                     <div class="titulo-calendario">
                         <span class="icone-calendario">
@@ -323,7 +318,6 @@
                         </button>
 
                         <div class="seletor-vertical" id="seletor-vertical">
-
                             <div class="seletor-coluna">
                                 <span class="valor-anterior" id="mes-anterior-texto"></span>
                                 <strong id="mes-selecionado"></strong>
@@ -335,7 +329,6 @@
                                 <strong id="ano-selecionado"></strong>
                                 <span class="valor-proximo" id="ano-proximo-texto"></span>
                             </div>
-
                         </div>
                     </div>
                       
@@ -363,11 +356,9 @@
                             <select id="ano-mobile"></select>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="calendario-layout" id="calendario-layout">
-                   
                     <div class="calendario-mensal">
                         <div class="dias-semana">
                             <span>Dom</span>
@@ -383,14 +374,17 @@
                     </div>
 
                     <aside class="painel-dia" id="painel-dia">
-
                         <div class="painel-dia-topo">
                             <div>
                                 <h3 id="data-selecionada">14 de novembro</h3>
                                 <p id="quantidade-tarefas-dia">0 tarefas</p>
                             </div>
 
-                            <button type="button" id="voltar-calendario" aria-label="Fechar dia">
+                            <button 
+                                type="button" 
+                                id="voltar-calendario" 
+                                aria-label="Fechar dia"
+                            >
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M18 6L6 18M6 6L18 18"></path>
                                 </svg>
@@ -399,9 +393,7 @@
 
                         <div class="lista-tarefas-dia" id="lista-tarefas-dia"></div>
                     </aside>
-
                 </div>
-
             </section>
 
             <section class="pagina" id="configuracoes">
@@ -421,7 +413,6 @@
                 </div>
 
                 <div class="grade-configuracoes">
-
                     <article class="cartao-configuracao">
                         <div class="icone-cartao">☀</div>
                         <h3>Aparência</h3>
@@ -452,27 +443,20 @@
 
                         <span class="versao-configuracao">v1.0</span>
                     </article>
-
                 </div>
+             </section>
 
-            </section>
-
-            
         </main>
-        
     </div>
     
     <div class="modal" id="modal-tarefa">
-
         <div class="modal-conteudo">
-
             <div class="modal-topo">
                 <h2>Nova tarefa</h2>
                 <button type="button" id="fechar-modal">&times;</button>
             </div>
 
             <form id="form-tarefa">
-
                 <div class="campo">
                     <label for="nome-tarefa">Nome da tarefa</label>
                     <input
@@ -516,17 +500,17 @@
                     <button type="button" id="cancelar-tarefa">Cancelar</button>
                     <button type="submit">Salvar tarefa</button>
                 </div>
-
             </form>
-
         </div>
-
     </div>
 
     <div id="modal-exclusao" class="modal-exclusao">
-        <div class="modal-exclusao-conteudo" role="dialog"
-            aria-modal="true" aria-labelledby="titulo-exclusao">
-
+        <div 
+            class="modal-exclusao-conteudo" 
+            role="dialog"
+            aria-modal="true" 
+            aria-labelledby="titulo-exclusao"
+        >
             <div class="icone-exclusao">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M3 6h18M8 6V4h8v2m3 0-1 15H6L5 6"/>

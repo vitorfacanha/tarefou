@@ -72,7 +72,7 @@ body {
     transition: 0.3s;
 }
 
-.sidebar nav a:hover, 
+.sidebar nav a:hover,
 .sidebar nav a.ativo {
     background: #00bec833;
 }
@@ -1030,7 +1030,6 @@ body {
     transition: 0.2s;
 }
 
-
 #grade-calendario button:hover {
     border-color: #08B9C5;
     background: #97eaf03e;
@@ -1351,7 +1350,6 @@ body {
     color: #66809B;
     font-size: 14px;
 }
-
 
 .estado-vazio {
     min-height: 300px;
