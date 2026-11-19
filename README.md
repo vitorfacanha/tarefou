@@ -35,6 +35,22 @@ Durante o desenvolvimento, busquei criar uma interface agradável, organizada e 
 2. Abra a pasta do Tarefou.
 3. Execute o arquivo `index.html` no navegador.
 
+## Acesse o projeto
+
+O Tarefou também pode ser acessado diretamente pelo navegador, através do GitHub Pages:
+
+https://vitorfacanha.github.io/tarefou/
+
+## Decisões de implementação
+
+O projeto foi desenvolvido com HTML, CSS e JavaScript puro, sem a utilização de frameworks.
+
+Optei por separar os arquivos em pastas para manter o código organizado e facilitar futuras alterações.
+
+Para salvar as tarefas, utilizei o localStorage, permitindo que as informações permaneçam armazenadas no navegador mesmo após atualizar ou fechar a página.
+
+Também utilizei a manipulação do DOM para atualizar as tarefas e outras informações da interface sem precisar recarregar a página.
+
 A aplicação funciona diretamente no navegador, sem necessidade de instalação.
 
 ## Autor
